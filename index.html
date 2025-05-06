@@ -21,8 +21,8 @@
 <body>
 <div class="container">
   <div id="start-screen">
-    <h1>Meseriaș cu Gust – Descoperă ce știi și câștigă cu NutriBon!</h1>
-    <p>Răspunde corect la 3 întrebări și primești un baton NutriBon cadou de la standul Transilvania Nuts!</p>
+    <h1>Meseriaș cu Gust – Descoperă ce știi și câștigă cu Nutribon!</h1>
+    <p>Răspunde corect la 3 întrebări și primești un baton Nutribon cadou!</p>
     <button onclick="showCategories()">Start Quiz</button>
   </div>
 
@@ -42,9 +42,8 @@
   </div>
 
   <div id="result-screen" class="hidden">
-    <h2>Felicitări! Ești un Meseriaș cu Gust!</h2>
-    <p>Vino la standul Transilvania Nuts din Piața Cetății și ridică-ți batonul NutriBon!</p>
-    <p id="bonus-role"></p>
+    <h2 id="result-title"></h2>
+    <p id="result-message"></p>
     <button onclick="restart()">Reîncepe</button>
   </div>
 </div>
@@ -55,10 +54,10 @@ const quizzes = {
     title: "🍫 Nutriție și sănătate",
     questions: [
       {
-        question: "Ce conțin batoanele NutriBon?",
+        question: "Ce conțin batoanele Nutribon?",
         options: [
           { text: "Zahăr rafinat" },
-          { text: "Nuci, fructe, cereale integrale", correct: true },
+          { text: "Nuci și fructe uscate", correct: true },
           { text: "Arome artificiale" },
           { text: "Coloranți" }
         ]
@@ -73,7 +72,7 @@ const quizzes = {
         ]
       },
       {
-        question: "Ce înseamnă ‘gustare sănătoasă’?",
+        question: "Ce înseamnă "gustare sănătoasă"?",
         options: [
           { text: "Prăjitură ambalată" },
           { text: "Chipsuri cu sare" },
@@ -99,7 +98,7 @@ const quizzes = {
         question: "Ce tip de produse fabrică Transilvania Nuts?",
         options: [
           { text: "Produse lactate" },
-          { text: "Batoane nutritive și nuci", correct: true },
+          { text: "Batoane nutritive cu nuci", correct: true },
           { text: "Produse congelate" },
           { text: "Panificație" }
         ]
@@ -108,7 +107,7 @@ const quizzes = {
         question: "Cum se numește brandul de batoane al companiei?",
         options: [
           { text: "CiocoBar" },
-          { text: "NutriBon", correct: true },
+          { text: "Nutribon", correct: true },
           { text: "PowerSnack" },
           { text: "GoBar" }
         ]
@@ -204,15 +203,17 @@ function selectAnswer(option, button) {
 function showResult() {
   document.getElementById("quiz-screen").classList.add("hidden");
   document.getElementById("result-screen").classList.remove("hidden");
-  const role = getBonusRole();
-  document.getElementById("bonus-role").textContent = role ? `🔧 Meserie recomandată: ${role}` : "";
-}
 
-function getBonusRole() {
-  if (currentQuiz === quizzes.meserii && correctAnswers === 3) return "Tehnician în industrie alimentară";
-  if (currentQuiz === quizzes.transilvania && correctAnswers === 3) return "Operator linie producție";
-  if (currentQuiz === quizzes.nutritie && correctAnswers === 3) return "Ambalator manual/automat";
-  return "";
+  const title = document.getElementById("result-title");
+  const message = document.getElementById("result-message");
+
+  if (correctAnswers === currentQuiz.questions.length) {
+    title.textContent = "Felicitări! Ești un Meseriaș cu Gust!";
+    message.textContent = "Ai câștigat un baton Nutribon!";
+  } else {
+    title.textContent = "Ai răspuns corect la " + correctAnswers + " din 3 întrebări.";
+    message.textContent = "Încearcă din nou pentru a câștiga batonul Nutribon!";
+  }
 }
 
 function restart() {

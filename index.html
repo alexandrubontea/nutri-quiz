@@ -1,225 +1,225 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meseriaș cu Gust</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
-    .container { align-items: center; 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1, h2, h3 { text-align: center; }
-    button { display: block; margin: 20px auto; padding: 10px 20px; font-size: 18px; background: #5A9; color: white; border: none; border-radius: 8px; cursor: pointer; }
-    button:hover { background: #48a867; }
-    .question { margin-top: 20px; }
-    .answers button { margin: 10px 0; width: 100%; text-align: left; background: #eee; color: #000; border: 1px solid #ccc; }
-    .answers button.correct { background: #c8e6c9; }
-    .answers button.wrong { background: #ffcdd2; }
-    .hidden { display: none; }
-    .category-btn { margin: 10px 0; display: flex; flex-direction: column; align-items: center; width: 80%; max-width: 300px; }
-  </style>
-</head>
-<body>
-<div class="container">
-  <div id="start-screen">
-    <h1>Meseriaș cu Gust – Descoperă ce știi și câștigă cu Nutribon!</h1>
-    <p>Răspunde corect la 3 întrebări și primești un baton Nutribon cadou!</p>
-    <button onclick="showCategories()">Start Quiz</button>
-  </div>
+  <!DOCTYPE html>
+  <html lang="ro">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meseriaș cu Gust</title>
+    <style>
+      body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
+      .container { align-items: center; 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+      h1, h2, h3 { text-align: center; }
+      button { display: block; margin: 20px auto; padding: 10px 20px; font-size: 18px; background: #5A9; color: white; border: none; border-radius: 8px; cursor: pointer; }
+      button:hover { background: #48a867; }
+      .question { margin-top: 20px; }
+      .answers button { margin: 10px 0; width: 100%; text-align: left; background: #eee; color: #000; border: 1px solid #ccc; }
+      .answers button.correct { background: #c8e6c9; }
+      .answers button.wrong { background: #ffcdd2; }
+      .hidden { display: none; }
+      .category-btn { margin: 10px 0; display: flex; flex-direction: column; align-items: center; width: 80%; max-width: 100%; }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    <div id="start-screen">
+      <h1>Meseriaș cu Gust – Descoperă ce știi și câștigă cu Nutribon!</h1>
+      <p>Răspunde corect la 3 întrebări și primești un baton Nutribon cadou!</p>
+      <button onclick="showCategories()">Start Quiz</button>
+    </div>
 
-  <div id="category-screen" class="hidden">
-    <h2>Selectează categoria</h2>
-    <button class="category-btn" onclick="startQuiz('nutritie')">🍫 Nutriție și sănătate</button>
-    <button class="category-btn" onclick="startQuiz('transilvania')">🏭 Despre Transilvania Nuts</button>
-    <button class="category-btn" onclick="startQuiz('meserii')">🧰 Meserii și învățământ profesional</button>
-  </div>
+    <div id="category-screen" class="hidden">
+      <h2>Selectează categoria</h2>
+      <button class="category-btn" onclick="startQuiz('nutritie')">🍫 Nutriție și sănătate</button>
+      <button class="category-btn" onclick="startQuiz('transilvania')">🏭 Despre Transilvania Nuts</button>
+      <button class="category-btn" onclick="startQuiz('meserii')">🧰 Meserii și învățământ profesional</button>
+    </div>
 
-  <div id="quiz-screen" class="hidden">
-    <h2 id="quiz-title"></h2>
-    <div class="question">
-      <h3 id="question-text"></h3>
-      <div class="answers" id="answers"></div>
+    <div id="quiz-screen" class="hidden">
+      <h2 id="quiz-title"></h2>
+      <div class="question">
+        <h3 id="question-text"></h3>
+        <div class="answers" id="answers"></div>
+      </div>
+    </div>
+
+    <div id="result-screen" class="hidden">
+      <h2 id="result-title"></h2>
+      <p id="result-message"></p>
+      <button onclick="restart()">Reîncepe</button>
     </div>
   </div>
 
-  <div id="result-screen" class="hidden">
-    <h2 id="result-title"></h2>
-    <p id="result-message"></p>
-    <button onclick="restart()">Reîncepe</button>
-  </div>
-</div>
-
-<script>
-const quizzes = {
-  nutritie: {
-    title: "🍫 Nutriție și sănătate",
-    questions: [
-      {
-        question: "Ce conțin batoanele Nutribon?",
-        options: [
-          { text: "Zahăr rafinat" },
-          { text: "Nuci și fructe uscate", correct: true },
-          { text: "Arome artificiale" },
-          { text: "Coloranți" }
-        ]
-      },
-      {
-        question: "Care este un beneficiu al consumului de nuci?",
-        options: [
-          { text: "Crește colesterolul" },
-          { text: "Îmbunătățește memoria", correct: true },
-          { text: "Nu are nicio valoare nutritivă" },
-          { text: "Dă somnolență" }
-        ]
-      },
-      {
-        question: "Ce înseamnă \"gustare sănătoasă\"?",
-        options: [
-          { text: "Prăjitură ambalată" },
-          { text: "Chipsuri cu sare" },
-          { text: "Baton cu fibre și vitamine", correct: true },
-          { text: "Suc acidulat" }
-        ]
-      }
-    ]
-  },
-  transilvania: {
-    title: "🏭 Despre Transilvania Nuts",
-    questions: [
-      {
-        question: "Unde este situată fabrica Transilvania Nuts?",
-        options: [
-          { text: "Alba Iulia" },
-          { text: "Sebeș" },
-          { text: "Ciugud", correct: true },
-          { text: "Cluj-Napoca" }
-        ]
-      },
-      {
-        question: "Ce tip de produse fabrică Transilvania Nuts?",
-        options: [
-          { text: "Produse lactate" },
-          { text: "Batoane nutritive cu nuci", correct: true },
-          { text: "Produse congelate" },
-          { text: "Panificație" }
-        ]
-      },
-      {
-        question: "Cum se numește brandul de batoane al companiei?",
-        options: [
-          { text: "CiocoBar" },
-          { text: "Nutribon", correct: true },
-          { text: "PowerSnack" },
-          { text: "GoBar" }
-        ]
-      }
-    ]
-  },
-  meserii: {
-    title: "🧰 Meserii și învățământ profesional",
-    questions: [
-      {
-        question: "Cine supraveghează procesul de fabricare a alimentelor?",
-        options: [
-          { text: "Designer" },
-          { text: "Tehnician industrie alimentară", correct: true },
-          { text: "Contabil" },
-          { text: "Brutar" }
-        ]
-      },
-      {
-        question: "Ce face un operator linie producție?",
-        options: [
-          { text: "Lucrează cu copii" },
-          { text: "Scrie articole" },
-          { text: "Asigură funcționarea echipamentelor de producție", correct: true },
-          { text: "Montează mobilier" }
-        ]
-      },
-      {
-        question: "Unde poți învăța o meserie în domeniul alimentar?",
-        options: [
-          { text: "Grădiniță" },
-          { text: "Liceu tehnologic", correct: true },
-          { text: "Club sportiv" },
-          { text: "Facultate de arte" }
-        ]
-      }
-    ]
-  }
-};
-
-let currentQuiz = null;
-let currentQuestionIndex = 0;
-let correctAnswers = 0;
-
-function showCategories() {
-  document.getElementById("start-screen").classList.add("hidden");
-  document.getElementById("category-screen").classList.remove("hidden");
-}
-
-function startQuiz(category) {
-  currentQuiz = quizzes[category];
-  currentQuestionIndex = 0;
-  correctAnswers = 0;
-  document.getElementById("category-screen").classList.add("hidden");
-  document.getElementById("quiz-screen").classList.remove("hidden");
-  document.getElementById("quiz-title").textContent = currentQuiz.title;
-  showQuestion();
-}
-
-function showQuestion() {
-  const questionObj = currentQuiz.questions[currentQuestionIndex];
-  document.getElementById("question-text").textContent = questionObj.question;
-  const answersDiv = document.getElementById("answers");
-  answersDiv.innerHTML = "";
-
-  questionObj.options.forEach(opt => {
-    const btn = document.createElement("button");
-    btn.textContent = opt.text;
-    btn.onclick = () => selectAnswer(opt, btn);
-    answersDiv.appendChild(btn);
-  });
-}
-
-function selectAnswer(option, button) {
-  const buttons = document.querySelectorAll("#answers button");
-  buttons.forEach(btn => btn.disabled = true);
-  if (option.correct) {
-    correctAnswers++;
-    button.classList.add("correct");
-  } else {
-    button.classList.add("wrong");
-  }
-  setTimeout(() => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < currentQuiz.questions.length) {
-      showQuestion();
-    } else {
-      showResult();
+  <script>
+  const quizzes = {
+    nutritie: {
+      title: "🍫 Nutriție și sănătate",
+      questions: [
+        {
+          question: "Ce conțin batoanele Nutribon?",
+          options: [
+            { text: "Zahăr rafinat" },
+            { text: "Nuci și fructe uscate", correct: true },
+            { text: "Arome artificiale" },
+            { text: "Coloranți" }
+          ]
+        },
+        {
+          question: "Care este un beneficiu al consumului de nuci?",
+          options: [
+            { text: "Crește colesterolul" },
+            { text: "Îmbunătățește memoria", correct: true },
+            { text: "Nu are nicio valoare nutritivă" },
+            { text: "Dă somnolență" }
+          ]
+        },
+        {
+          question: "Ce înseamnă \"gustare sănătoasă\"?",
+          options: [
+            { text: "Prăjitură ambalată" },
+            { text: "Chipsuri cu sare" },
+            { text: "Baton cu fibre și vitamine", correct: true },
+            { text: "Suc acidulat" }
+          ]
+        }
+      ]
+    },
+    transilvania: {
+      title: "🏭 Despre Transilvania Nuts",
+      questions: [
+        {
+          question: "Unde este situată fabrica Transilvania Nuts?",
+          options: [
+            { text: "Alba Iulia" },
+            { text: "Sebeș" },
+            { text: "Ciugud", correct: true },
+            { text: "Cluj-Napoca" }
+          ]
+        },
+        {
+          question: "Ce tip de produse fabrică Transilvania Nuts?",
+          options: [
+            { text: "Produse lactate" },
+            { text: "Batoane nutritive cu nuci", correct: true },
+            { text: "Produse congelate" },
+            { text: "Panificație" }
+          ]
+        },
+        {
+          question: "Cum se numește brandul de batoane al companiei?",
+          options: [
+            { text: "CiocoBar" },
+            { text: "Nutribon", correct: true },
+            { text: "PowerSnack" },
+            { text: "GoBar" }
+          ]
+        }
+      ]
+    },
+    meserii: {
+      title: "🧰 Meserii și învățământ profesional",
+      questions: [
+        {
+          question: "Cine supraveghează procesul de fabricare a alimentelor?",
+          options: [
+            { text: "Designer" },
+            { text: "Tehnician industrie alimentară", correct: true },
+            { text: "Contabil" },
+            { text: "Brutar" }
+          ]
+        },
+        {
+          question: "Ce face un operator linie producție?",
+          options: [
+            { text: "Lucrează cu copii" },
+            { text: "Scrie articole" },
+            { text: "Asigură funcționarea echipamentelor de producție", correct: true },
+            { text: "Montează mobilier" }
+          ]
+        },
+        {
+          question: "Unde poți învăța o meserie în domeniul alimentar?",
+          options: [
+            { text: "Grădiniță" },
+            { text: "Liceu tehnologic", correct: true },
+            { text: "Club sportiv" },
+            { text: "Facultate de arte" }
+          ]
+        }
+      ]
     }
-  }, 800);
-}
+  };
 
-function showResult() {
-  document.getElementById("quiz-screen").classList.add("hidden");
-  document.getElementById("result-screen").classList.remove("hidden");
+  let currentQuiz = null;
+  let currentQuestionIndex = 0;
+  let correctAnswers = 0;
 
-  const title = document.getElementById("result-title");
-  const message = document.getElementById("result-message");
-
-  if (correctAnswers === currentQuiz.questions.length) {
-    title.textContent = "Felicitări! Ești un Meseriaș cu Gust!";
-    message.textContent = "Ai câștigat un baton Nutribon!";
-  } else {
-    title.textContent = "Ai răspuns corect la " + correctAnswers + " din 3 întrebări.";
-    message.textContent = "Încearcă din nou pentru a câștiga batonul Nutribon!";
+  function showCategories() {
+    document.getElementById("start-screen").classList.add("hidden");
+    document.getElementById("category-screen").classList.remove("hidden");
   }
-}
 
-function restart() {
-  document.getElementById("result-screen").classList.add("hidden");
-  document.getElementById("start-screen").classList.remove("hidden");
-}
-</script>
-</body>
-</html>
+  function startQuiz(category) {
+    currentQuiz = quizzes[category];
+    currentQuestionIndex = 0;
+    correctAnswers = 0;
+    document.getElementById("category-screen").classList.add("hidden");
+    document.getElementById("quiz-screen").classList.remove("hidden");
+    document.getElementById("quiz-title").textContent = currentQuiz.title;
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const questionObj = currentQuiz.questions[currentQuestionIndex];
+    document.getElementById("question-text").textContent = questionObj.question;
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    questionObj.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt.text;
+      btn.onclick = () => selectAnswer(opt, btn);
+      answersDiv.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(option, button) {
+    const buttons = document.querySelectorAll("#answers button");
+    buttons.forEach(btn => btn.disabled = true);
+    if (option.correct) {
+      correctAnswers++;
+      button.classList.add("correct");
+    } else {
+      button.classList.add("wrong");
+    }
+    setTimeout(() => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < currentQuiz.questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }, 800);
+  }
+
+  function showResult() {
+    document.getElementById("quiz-screen").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
+
+    const title = document.getElementById("result-title");
+    const message = document.getElementById("result-message");
+
+    if (correctAnswers === currentQuiz.questions.length) {
+      title.textContent = "Felicitări! Ești un Meseriaș cu Gust!";
+      message.textContent = "Ai câștigat un baton Nutribon!";
+    } else {
+      title.textContent = "Ai răspuns corect la " + correctAnswers + " din 3 întrebări.";
+      message.textContent = "Încearcă din nou pentru a câștiga batonul Nutribon!";
+    }
+  }
+
+  function restart() {
+    document.getElementById("result-screen").classList.add("hidden");
+    document.getElementById("start-screen").classList.remove("hidden");
+  }
+  </script>
+  </body>
+  </html>

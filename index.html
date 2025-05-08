@@ -23,15 +23,15 @@
   <div class="container">
     <div id="start-screen">
       <h1>Meseriaș cu Gust – Descoperă ce știi și câștigă cu Nutribon!</h1>
+      <img src="images/banner_quiz.png" alt="banner-quiz" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;">
       <p>Răspunde corect la 3 întrebări și primești un baton Nutribon cadou!</p>
       <button onclick="showCategories()">Start Quiz</button>
     </div>
 
     <div id="category-screen" class="hidden">
       <h2>Selectează categoria</h2>
-      <button class="category-btn" onclick="startQuiz('nutritie')">🍫 Nutriție și sănătate</button>
+      <button class="category-btn" onclick="startQuiz('meserii')">🧰 Meserii din industria alimentară</button>
       <button class="category-btn" onclick="startQuiz('transilvania')">🏭 Despre Transilvania Nuts</button>
-      <button class="category-btn" onclick="startQuiz('meserii')">🧰 Meserii și învățământ profesional</button>
     </div>
 
     <div id="quiz-screen" class="hidden">
@@ -51,98 +51,84 @@
 
   <script>
   const quizzes = {
-    nutritie: {
-      title: "🍫 Nutriție și sănătate",
+    meserii: {
+      title: "🧰 Meserii și învățământ profesional",
       questions: [
         {
-          question: "Ce conțin batoanele Nutribon?",
+          question: "1.	Ce face un operator producție?",
           options: [
-            { text: "Zahăr rafinat" },
-            { text: "Nuci și fructe uscate", correct: true },
-            { text: "Arome artificiale" },
-            { text: "Coloranți" }
+            { text: "Scrie articole" },
+            { text: "Lucreaza cu utilajele din zona de producție", correct: true },
+            { text: "Pictează pereți" },
+            { text: "Transportă marfă" }
           ]
         },
         {
-          question: "Care este un beneficiu al consumului de nuci?",
+          question: "2.	Rolul unui tehnician mentenanță este:",
           options: [
-            { text: "Crește colesterolul" },
-            { text: "Îmbunătățește memoria", correct: true },
-            { text: "Nu are nicio valoare nutritivă" },
-            { text: "Dă somnolență" }
+            { text: "Face curat în fabrică" },
+            { text: "Vinde produse" },
+            { text: "Repară și întreține utilajele", correct: true },
+            { text: "Montează mobilă" }
           ]
         },
         {
-          question: "Ce înseamnă \"gustare sănătoasă\"?",
+          question: "3.	Unde poți învăța o meserie precum cele anterioare?",
           options: [
-            { text: "Prăjitură ambalată" },
-            { text: "Chipsuri cu sare" },
-            { text: "Baton cu fibre și vitamine", correct: true },
-            { text: "Suc acidulat" }
+            { text: "Liceu tehnologic sau învățământ dual", correct: true },
+            { text: "Grădiniță" },
+            { text: "Sală de sport" },
+            { text: "Facultate de arte" }
           ]
-        }
+        },
+        {
+          question: "4.	Ce aspecte sunt importante în industria alimentară?",
+          options: [
+            { text: "Graba și neatenția" },
+            { text: "Spirit artistic" },
+            { text: "Abilități de dans" },
+            { text: "Responsabilitate și atenție la igienă", correct: true },
+          ]
+        },
       ]
     },
     transilvania: {
       title: "🏭 Despre Transilvania Nuts",
       questions: [
         {
-          question: "Unde este situată fabrica Transilvania Nuts?",
+          question: "1.	Unde este fabrica Transilvania Nuts?",
           options: [
-            { text: "Alba Iulia" },
             { text: "Sebeș" },
+            { text: "Alba Iulia" },
             { text: "Ciugud", correct: true },
-            { text: "Cluj-Napoca" }
+            { text: "Sibiu" }
           ]
         },
         {
-          question: "Ce tip de produse fabrică Transilvania Nuts?",
+          question: "2.	Ce produce compania Transilvania Nuts?",
           options: [
-            { text: "Produse lactate" },
-            { text: "Batoane nutritive cu nuci", correct: true },
-            { text: "Produse congelate" },
-            { text: "Panificație" }
+          { text: "Batoane nutritive si mixuri cu nuci si fructe uscate", correct: true },
+            { text: "Produse de panificație" },
+            { text: "Mezeluri" },
+            { text: "Lapte și iaurt" }
           ]
         },
         {
-          question: "Cum se numește brandul de batoane al companiei?",
+          question: "3.	Cum se numește brandul de batoane nutritive al companiei?",
           options: [
-            { text: "CiocoBar" },
-            { text: "Nutribon", correct: true },
+            { text: "GoBar" },
             { text: "PowerSnack" },
-            { text: "GoBar" }
-          ]
-        }
-      ]
-    },
-    meserii: {
-      title: "🧰 Meserii și învățământ profesional",
-      questions: [
-        {
-          question: "Cine supraveghează procesul de fabricare a alimentelor?",
-          options: [
-            { text: "Designer" },
-            { text: "Tehnician industrie alimentară", correct: true },
-            { text: "Contabil" },
-            { text: "Brutar" }
+            { text: "SnackFix" },
+            { text: "Nutribon", correct: true }
           ]
         },
         {
-          question: "Ce face un operator linie producție?",
+          question: "4.	De ce este importantă Transilvania Nuts pentru județul Alba?",
           options: [
-            { text: "Lucrează cu copii" },
-            { text: "Scrie articole" },
-            { text: "Asigură funcționarea echipamentelor de producție", correct: true },
-            { text: "Montează mobilier" }
-          ]
-        },
-        {
-          question: "Unde poți învăța o meserie în domeniul alimentar?",
-          options: [
-            { text: "Grădiniță" },
-            { text: "Liceu tehnologic", correct: true },
-            { text: "Club sportiv" },
-            { text: "Facultate de arte" }
+            { text: "Este un parc de distracții" },
+            { text: "Scrie cărți pentru copii" },
+            { text: "Creează locuri de muncă și produce gustări sănătoase", correct: true },
+            { text: "Vinde telefoane mobile" }
           ]
         }
       ]
@@ -202,20 +188,35 @@
   }
 
   function showResult() {
-    document.getElementById("quiz-screen").classList.add("hidden");
-    document.getElementById("result-screen").classList.remove("hidden");
+  document.getElementById("quiz-screen").classList.add("hidden");
+  document.getElementById("result-screen").classList.remove("hidden");
 
-    const title = document.getElementById("result-title");
-    const message = document.getElementById("result-message");
+  const title = document.getElementById("result-title");
+  const message = document.getElementById("result-message");
 
-    if (correctAnswers === currentQuiz.questions.length) {
-      title.textContent = "Felicitări! Ești un Meseriaș cu Gust!";
-      message.textContent = "Ai câștigat un baton Nutribon!";
-    } else {
-      title.textContent = "Ai răspuns corect la " + correctAnswers + " din 3 întrebări.";
-      message.textContent = "Încearcă din nou pentru a câștiga batonul Nutribon!";
-    }
+  const prizes = [
+    "🥇 Un baton Nutribon",
+    "🧶 O brățară Nutribon",
+    "💰 Un bănuț de cumpărături",
+    "🧢 O șapcă Nutribon – ca să arăți ca un adevărat \"Meseriaș cu Gust\"!"
+  ];
+
+  if (correctAnswers === currentQuiz.questions.length) {
+    // Perfect score
+    const prize = prizes[Math.floor(Math.random() * prizes.length)];
+    title.textContent = "Felicitări! Ești un Meseriaș cu Gust!";
+    message.textContent = "Ai răspuns corect la toate întrebările și ai câștigat: " + prize;
+  } else if (correctAnswers >= 3) {
+    // Almost perfect – still a winner!
+    const prize = prizes[Math.floor(Math.random() * prizes.length)];
+    title.textContent = "Bravo! Ești aproape un expert în gust!";
+    message.textContent = "Ai răspuns corect la " + correctAnswers + " din 4 întrebări și ai câștigat: " + prize;
+  } else {
+    // Not enough correct answers
+    title.textContent = "Ai răspuns corect la " + correctAnswers + " din 4 întrebări.";
+    message.textContent = "Mai încearcă o dată și gustul câștigului poate fi al tău!";
   }
+}
 
   function restart() {
     document.getElementById("result-screen").classList.add("hidden");
